@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTitleAndBodyToArticle extends Migration
+class CreateCommentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class AddTitleAndBodyToArticle extends Migration
      */
     public function up()
     {
-        Schema::table('articles', function (Blueprint $table) {
-            $table->string('title');
-            $table->text('body');
+        Schema::create('comments', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id');
+            $table->integer('article_id');
+            $table->string('body');
+            $table->timestamps();
         });
     }
 
@@ -26,8 +29,6 @@ class AddTitleAndBodyToArticle extends Migration
      */
     public function down()
     {
-        Schema::table('articles', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('comments');
     }
 }
