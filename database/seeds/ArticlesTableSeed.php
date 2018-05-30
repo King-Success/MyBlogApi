@@ -19,6 +19,7 @@ class ArticlesTableSeed extends Seeder
             Article::create([
                 'title' => $faker->sentence,
                 'body' => $faker->paragraph,
+                'category_id' => $faker->numberBetween($min=1, $max=6),
             ]);
         }
     }

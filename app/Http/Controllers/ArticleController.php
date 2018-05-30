@@ -14,12 +14,17 @@ class ArticleController extends Controller
     }
 
 
-    public function store(Request $request)
+     public function store(Request $request)
     {
-        $article = Article::create($request->all());
-        return response()->json($article, 201);
-    } 
+        $article = new Article;
+        $article->category_id = $request['category_id'];
+        $article->title = $request['title'];
+        $article->body = $request['body'];
+        
+        $article->save();
+        return response()->json($article, 200);
 
+    }
 
     public function show(Article $article)
     {
@@ -38,4 +43,9 @@ class ArticleController extends Controller
         $article->delete();
         return response()->json(null, 204);
     }
+
+    public function paginate($recordsCount) {
+
+    }
+
 }
